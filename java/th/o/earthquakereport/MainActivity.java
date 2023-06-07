@@ -17,6 +17,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private EarthquakeAdapter adapter;
     Retrofit retrofit;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private gpsTracker gpsTracker;
+    double latitude, longitude;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,11 +54,52 @@ public class MainActivity extends AppCompatActivity {
             case R.id.setting:
                 Intent intent = new Intent(MainActivity.this, setting.class);
                 startActivity(intent);
-                return true;
+                break;
 
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.about:
+                Intent intent_about = new Intent(MainActivity.this, about.class);
+                startActivity(intent_about);
+                break;
+
+            case R.id.gpsButton:
+
+                getLocation();
+
+                BigDecimal roundedValue_latitude = BigDecimal.valueOf(latitude).setScale(4, RoundingMode.HALF_UP);
+                double latitude_final = roundedValue_latitude.doubleValue();
+
+                BigDecimal roundedValue_longitude = BigDecimal.valueOf(longitude).setScale(4, RoundingMode.HALF_UP);
+                double longitude_final = roundedValue_longitude.doubleValue();
+
+                MyApiService apiService = retrofit.create(MyApiService.class);
+                Call<EarthquakeResponse> call = apiService.getEarthquakesByCoordinates("geojson", latitude_final, longitude_final, 10);
+                call.enqueue(new Callback<EarthquakeResponse>() {
+                    @Override
+                    public void onResponse(Call<EarthquakeResponse> call, Response<EarthquakeResponse> response) {
+                        if (response.isSuccessful()) {
+                            EarthquakeResponse earthquakeResponse = response.body();
+                            if (earthquakeResponse != null) {
+                                List<Earthquake> earthquakes = earthquakeResponse.getEarthquakes();
+                                // Retrieve the first 10 earthquakes or less if the list is smaller
+                                List<Earthquake> displayedEarthquakes = earthquakes.subList(0, Math.min(100, earthquakes.size()));
+                                adapter.setEarthquakes(displayedEarthquakes);
+
+                            }
+                        } else {
+                            // Handle error
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<EarthquakeResponse> call, Throwable t) {
+                        // Handle network errors
+                    }
+                });
+
+                break;
+
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -62,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutMain);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getData(3.0, 10.0, "time", null);
-            }
-        });
+//        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutMain);
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                getData(3.0, 10.0, "time", null);
+//            }
+//        });
 
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -104,6 +149,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (isNetworkAvailable()) {
+
+            getData(minMagnitude, maxMagnitude, order, alert);
+
+            swipeRefreshLayout.setRefreshing(false);
+        } else {
+            Toast.makeText(MainActivity.this, "Network Error !!!", Toast.LENGTH_SHORT).show();
+            swipeRefreshLayout.setRefreshing(false);
+        }
 
     }
 
@@ -143,6 +197,14 @@ public class MainActivity extends AppCompatActivity {
                 @Query("orderby") String order,
                 @Query("alertlevel") String alertLevel
         );
+
+        @GET("query")
+        Call<EarthquakeResponse> getEarthquakesByCoordinates(
+                @Query("format") String format,
+                @Query("latitude") double latitude,
+                @Query(("longitude")) double longitude,
+                @Query(("maxradius")) double radius
+        );
     }
 
     class EarthquakeResponse {
@@ -158,5 +220,17 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void getLocation() {
+        gpsTracker = new gpsTracker(MainActivity.this);
+        if (gpsTracker.canGetLocation()) {
+            latitude = gpsTracker.getLatitude();
+            longitude = gpsTracker.getLongitude();
+
+        } else {
+            gpsTracker.showSettingsAlert();
+        }
+
     }
 }

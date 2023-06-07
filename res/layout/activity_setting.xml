@@ -4,197 +4,189 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".setting">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Set Minimum Magnitude"
-        android:textColor="#ffff"
-        android:textSize="20sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ffff" />
-
-    <RadioGroup
-        android:id="@+id/RadioGroupMagnitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/RadioGroup2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:textColor="#ffff" />
-
-        <RadioButton
-            android:id="@+id/RadioGroup3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"
-            android:textColor="#ffff" />
-
-        <RadioButton
-            android:id="@+id/RadioGroup4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
-            android:textColor="#ffff" />
-
-        <RadioButton
-            android:id="@+id/RadioGroup5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            android:textColor="#ffff" />
-
-        <RadioButton
-            android:id="@+id/RadioGroup6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6"
-            android:textColor="#ffff" />
-
-        <RadioButton
-            android:id="@+id/RadioGroup7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
-            android:textColor="#ffff" />
-
-        <RadioButton
-            android:id="@+id/RadioGroup8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8"
-            android:textColor="#ffff" />
-
-    </RadioGroup>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ffff" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Set Alert Level"
-        android:textColor="#ffff"
-        android:textSize="20sp" />
-
-    <RadioGroup
-        android:id="@+id/RadioGroupAlert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/greenAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Green"
-            android:textColor="#ffff" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Set Minimum Magnitude"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000" />
+
+            <RadioGroup
+                android:id="@+id/RadioGroupMagnitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/RadioGroup2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2" />
+
+                <RadioButton
+                    android:id="@+id/RadioGroup3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3" />
+
+                <RadioButton
+                    android:id="@+id/RadioGroup4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4" />
+
+                <RadioButton
+                    android:id="@+id/RadioGroup5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
+
+                <RadioButton
+                    android:id="@+id/RadioGroup6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6" />
+
+                <RadioButton
+                    android:id="@+id/RadioGroup7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7" />
+
+                <RadioButton
+                    android:id="@+id/RadioGroup8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8" />
+
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Set Alert Level"
+                android:textSize="20sp" />
+
+            <RadioGroup
+                android:id="@+id/RadioGroupAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/greenAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Green" />
 
 
-        <RadioButton
-            android:id="@+id/yellowAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Yellow"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/yellowAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yellow" />
 
-        <RadioButton
-            android:id="@+id/orangeAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Orange"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/orangeAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orange" />
 
 
-        <RadioButton
-            android:id="@+id/redAlert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Red"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/redAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Red" />
 
-    </RadioGroup>
+            </RadioGroup>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Select order type"
-        android:textColor="#ffff"
-        android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Select order type"
+                android:textSize="20sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#ffff" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000" />
 
-    <RadioGroup
-        android:id="@+id/RadioGroupOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            <RadioGroup
+                android:id="@+id/RadioGroupOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/orderByDescendingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DescendingTime"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/orderByDescendingTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DescendingTime" />
 
 
-        <RadioButton
-            android:id="@+id/orderByAscendingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AscendingTime"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/orderByAscendingTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AscendingTime" />
 
-        <RadioButton
-            android:id="@+id/orderByDescendingMagnitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DescendingMagnitude"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/orderByDescendingMagnitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DescendingMagnitude" />
 
 
-        <RadioButton
-            android:id="@+id/orderByAscendingMagnitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AscendingMagnitude"
-            android:textColor="#ffff" />
+                <RadioButton
+                    android:id="@+id/orderByAscendingMagnitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AscendingMagnitude" />
 
-    </RadioGroup>
+            </RadioGroup>
 
 
-    <Button
-        android:id="@+id/applyButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="apply"
-        android:textColor="#ffff" />
+            <Button
+                android:id="@+id/applyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="apply" />
 
-    <Button
-        android:id="@+id/defaultButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="default"
-        android:textColor="#ffff" />
+            <Button
+                android:id="@+id/defaultButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="default" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
